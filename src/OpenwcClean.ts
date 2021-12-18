@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { property } from 'lit/decorators.js';
-import { LocalStorage } from 'lowdb'
+import turf from '@turf/turf';
 
 const logo = new URL('../../assets/open-wc-logo.svg', import.meta.url).href;
 
@@ -14,7 +14,13 @@ export class OpenwcClean extends LitElement {
   connectedCallback() {
     super.connectedCallback();
 
-    const adapter = new LocalStorage<Data>('db')
+  }
+
+  private turf() {
+    var point = turf.point([-75.343, 39.984]);
+    var distance = 50;
+    var bearing = 90;
+    var destination = turf.destination(point, distance, bearing, {units: 'miles'});
   }
 
   static styles = css`
